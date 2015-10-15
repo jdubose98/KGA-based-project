@@ -1,19 +1,23 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-
+Project("{0E4A5037-CAFA-3F75-BEC0-A164CB6CD91D}") = "KGA-project", "Assembly-CSharp.csproj", "{DB85B664-2537-9249-5137-ADCF2214CD6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-
+		{DB85B664-2537-9249-5137-ADCF2214CD6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB85B664-2537-9249-5137-ADCF2214CD6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB85B664-2537-9249-5137-ADCF2214CD6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB85B664-2537-9249-5137-ADCF2214CD6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-					GlobalSection(MonoDevelopProperties) = preSolution
+							GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
