@@ -1,8 +1,8 @@
 ATARI TITLE CLONE:
-Galaga
+Galaga - Galactic Fighter
 
 NES TITLE CLONE:
-Spy Hunter
+Spy Hunter - Road Warrior
 
 WEB TITLE CLONE:
-Zilch
+Zilch - Zippo

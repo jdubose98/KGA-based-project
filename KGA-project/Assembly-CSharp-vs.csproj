@@ -46,22 +46,28 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Movement.cs" />
+     <Compile Include="Assets\PlayerController_Spaceship.cs" />
      <None Include="Assets\Kenney\Game icons (100 assets)\Spritesheet\sheet_white1x.xml" />
      <None Include="Assets\Kenney\Explosion pack (60 assets)\Spritesheets\spritesheet_groundExplosion.xml" />
      <None Include="Assets\Kenney\Topdown Tanks (85 assets)\Spritesheet\sheet_tanks.xml" />
+     <None Include="Assets\Kenney\Racing pack (420 assets)\Spritesheets\spritesheet_characters.xml" />
      <None Include="Assets\Kenney\Game icons expansion (60 assets)\Spritesheet\sheet_colored1x.xml" />
      <None Include="Assets\Kenney\Game icons (100 assets)\Spritesheet\sheet_black1x.xml" />
+     <None Include="Assets\Kenney\Road textures (80 assets)\Spritesheet\spritesheet.txt" />
      <None Include="Assets\Kenney\Game icons (100 assets)\Spritesheet\sheet_white2x.xml" />
      <None Include="Assets\Kenney\Explosion pack (60 assets)\Spritesheets\spritesheet_sonicExplosion.xml" />
      <None Include="Assets\Kenney\Game icons expansion (60 assets)\Spritesheet\sheet_colored2x.xml" />
      <None Include="Assets\Kenney\UI pack (300 assets)\Base pack (140 assets)\Spritesheet\yellowSheet.xml" />
      <None Include="Assets\Kenney\Game icons expansion (60 assets)\Spritesheet\sheet_white1x.xml" />
+     <None Include="Assets\Kenney\Racing pack (420 assets)\Spritesheets\spritesheet_vehicles.xml" />
      <None Include="Assets\Kenney\Explosion pack (60 assets)\Spritesheets\spritesheet_pixelExplosion.xml" />
      <None Include="Assets\Kenney\Explosion pack (60 assets)\Spritesheets\spritesheet_particles.xml" />
+     <None Include="Assets\Kenney\Space shooter assets (300 assets)\Spritesheet\sheet.xml" />
      <None Include="Assets\Kenney\UI pack (300 assets)\Adventure pack (80 assets)\Spritesheet\uipack_rpg_sheet.xml" />
+     <None Include="Assets\Kenney\Racing pack (420 assets)\Spritesheets\spritesheet_objects.xml" />
      <None Include="Assets\Kenney\UI pack (300 assets)\Base pack (140 assets)\Spritesheet\blueSheet.xml" />
      <None Include="Assets\Kenney\Game icons expansion (60 assets)\Spritesheet\sheet_black1x.xml" />
+     <None Include="Assets\Kenney\Racing pack (420 assets)\Spritesheets\spritesheet_tiles.xml" />
      <None Include="Assets\Kenney\Game icons (100 assets)\Spritesheet\sheet_black2x.xml" />
      <None Include="Assets\Kenney\UI pack (300 assets)\Base pack (140 assets)\Spritesheet\greySheet.xml" />
      <None Include="Assets\Kenney\Explosion pack (60 assets)\Spritesheets\spritesheet_regularExplosion.xml" />
