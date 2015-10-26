@@ -46,7 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\PlayerController_Spaceship.cs" />
+     <Compile Include="Assets\Scripts\PlayerBulletScript.cs" />
+     <Compile Include="Assets\Scripts\PlayerController_Spaceship.cs" />
      <None Include="Assets\Kenney\Game icons (100 assets)\Spritesheet\sheet_white1x.xml" />
      <None Include="Assets\Kenney\Explosion pack (60 assets)\Spritesheets\spritesheet_groundExplosion.xml" />
      <None Include="Assets\Kenney\Topdown Tanks (85 assets)\Spritesheet\sheet_tanks.xml" />
