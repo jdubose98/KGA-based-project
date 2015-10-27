@@ -50,7 +50,8 @@ public class PlayerController_Spaceship : MonoBehaviour {
         var vect = new Vector3(Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"), 0); // Gets a new vector using the axes we're moving on.
 		{
 			transform.position = transform.position + (PlayerSpeed * vect.normalized * Time.deltaTime); // normalized vector (no cheating!) is mult. by the speed variable, then mult. by deltaTime to keep the speed consistent even under lag.
-		}
+            Camera.main.transform.position = transform.position + (PlayerSpeed * vect.normalized * Time.deltaTime) + new Vector3 (0,0,-10); // tracks the player
+        }
 
         // Handle displaying of thruster tail
         if (Input.GetAxisRaw ("Horizontal") != 0 || Input.GetAxisRaw ("Vertical") != 0) // Choosing raw because it cuts the thruster out and in instantly
