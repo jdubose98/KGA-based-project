@@ -4,15 +4,14 @@ using System.Collections;
 public class PlayerController_Spaceship : MonoBehaviour {
 
     //Define player variables
-    [SerializeField] bool Shielded = false; // Duh
-    [SerializeField] int ShieldStrength = 3; // How much "power" the shield has
-    [SerializeField] float TimeLeftOnShield = 10f; // A hard limit
+    public bool Shielded = false; // Duh
+    public int ShieldStrength = 3; // How much "power" the shield has
     [SerializeField] float ShieldDecayRate = .1f; // How much shield we steal every "tick" defined in the tickrate
     [SerializeField] float ShieldDecayTickrate = 1f; // Per second decay rate, for finer tuning
 
     // Uncategorized
     [SerializeField] float PlayerSpeed = 1f; // The speed of the player
-	[SerializeField] int DamageLevel = 0; // The damage state of the player's craft (up to 3)
+	public int PlayerDamageLevel = 0; // The damage state of the player's craft (up to 3)
     [SerializeField] SpriteRenderer ThrusterRenderer;
     [SerializeField] SpriteRenderer ShieldRenderer;
     [SerializeField] SpriteRenderer DamageOverlay;
@@ -44,6 +43,7 @@ public class PlayerController_Spaceship : MonoBehaviour {
 				Rigidbody2D projectile;
 				projectile = Instantiate(ProjectilePrefab, ProjectileSourceZone.position, ProjectileSourceZone.rotation) as Rigidbody2D;
 				projectile.AddForce(ProjectileSourceZone.forward*10000,ForceMode2D.Impulse);
+                projectile.GetComponent<PlayerBulletScript>().ProjectileSpeed = 8;
 			}
 		}
 
