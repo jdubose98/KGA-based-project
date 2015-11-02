@@ -10,6 +10,7 @@ public class EnemySpaceshipLogic : MonoBehaviour {
     [SerializeField] GameObject BulletPrefab;
     [SerializeField] Transform BulletSourceZone;
     [SerializeField] AudioSource FireSound;
+    [SerializeField] AudioSource DieSound;
     bool Dead = false;
 
 	// Use this for initialization
@@ -23,17 +24,23 @@ public class EnemySpaceshipLogic : MonoBehaviour {
         {
             Dead = true; // He's dead jim
         }
-        if (!Dead) // If the enemy is not dead
+        else if (!Dead) // If the enemy is not dead
         {
-            transform.LookAt(player); // Rotate towards the player with laser accuracy
-            var capturedTime = Time.time;
-            if (Time.time - capturedTime > EnemyFireRate)
+
+            var dir = player.transform.position - transform.position; // Where we need to look
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90; // Bringing back the copypasta! Does the math to rotate towards the player
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // I hate quaternions
+
+
+            var capturedTime = Time.time; // Get the current time
+            if (Time.time - capturedTime > EnemyFireRate) // Is the enemy ready to fire?
             {
+                Debug.Log("Fired");
                 FireSound.Play();
                 Rigidbody2D projectile;
-                projectile = Instantiate(BulletPrefab, BulletSourceZone.position, BulletSourceZone.rotation) as Rigidbody2D;
-                projectile.AddForce(BulletSourceZone.forward * 10000, ForceMode2D.Impulse);
-                projectile.GetComponent<PlayerBulletScript>().ProjectileSpeed = 8;
+                projectile = Instantiate(BulletPrefab, BulletSourceZone.position, BulletSourceZone.rotation) as Rigidbody2D; // create the new projectile
+                projectile.AddForce(BulletSourceZone.forward * 10000, ForceMode2D.Impulse); // go this way!
+                projectile.GetComponent<PlayerBulletScript>().ProjectileSpeed = 8; // how fast the projectile goes
             }
         }
         else if (Dead)

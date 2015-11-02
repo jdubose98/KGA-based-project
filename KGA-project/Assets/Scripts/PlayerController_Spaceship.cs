@@ -36,14 +36,14 @@ public class PlayerController_Spaceship : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetButtonDown ("Fire1")) { // checks to see if the player is firing
-			Debug.Log ("Fire button is down"); // just debugging
+			// Debug.Log ("Fire button is down"); // Debug - prune before the finished product!
 			float curTime = Time.time; // captures the current time
 			if ((curTime - lastFiredTime) > FireSpeed){ // determines if it's been long enough so we can fire again
-                FireSound.Play();
-				Rigidbody2D projectile;
-				projectile = Instantiate(ProjectilePrefab, ProjectileSourceZone.position, ProjectileSourceZone.rotation) as Rigidbody2D;
-				projectile.AddForce(ProjectileSourceZone.forward*10000,ForceMode2D.Impulse);
-                projectile.GetComponent<PlayerBulletScript>().ProjectileSpeed = 8;
+                FireSound.Play(); // pew!
+				Rigidbody2D projectile; // variable to hold onto it
+				projectile = Instantiate(ProjectilePrefab, ProjectileSourceZone.position, ProjectileSourceZone.rotation) as Rigidbody2D; // makes the projectile
+				projectile.AddForce(ProjectileSourceZone.forward*10000,ForceMode2D.Impulse); // throws the projectile forwards
+                projectile.GetComponent<PlayerBulletScript>().ProjectileSpeed = 8; // sets thhe bullet speed on the script
 			}
 		}
 

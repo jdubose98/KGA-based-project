@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerBulletScript : MonoBehaviour {
 
     static float ProjectileLife = 2; // Projectile life in seconds
-    public float ProjectileSpeed = 6; // Bullet speed
+    public float ProjectileSpeed = 12; // Bullet speed
     float Timer = Time.time + ProjectileLife; // Kinda cheaty
     [SerializeField] int ProjectileDamage = 9000; // Time for noscopes!
 
@@ -19,13 +19,13 @@ public class PlayerBulletScript : MonoBehaviour {
             projectile.transform.Translate(0, ProjectileSpeed * Time.deltaTime,0);
     }
 
-    void OnTriggerEnter(Collider hit)
+    void OnCollisionEnter(Collision2D hit)
     {
-        if (hit.tag == "Enemy" || hit.tag == "MapObject")
+        if (hit.gameObject.tag == "Enemy" || hit.gameObject.tag == "MapObject")
         {
-            if (hit.tag == "Enemy")
+            if (hit.gameObject.tag == "Enemy")
             {
-                //logic to deal damage goes here.
+                hit.gameObject.GetComponent<EnemySpaceshipLogic>().EnemyHealth = hit.gameObject.GetComponent<EnemySpaceshipLogic>().EnemyHealth - ProjectileDamage;
             }
             Destroy(gameObject);
         }
