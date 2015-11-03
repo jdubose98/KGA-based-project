@@ -14,6 +14,6 @@ public class CursorTracker : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         image.transform.position = Input.mousePosition;
-        image.transform.Rotate(0, 0, Mathf.Deg2Rad*5);
+        image.transform.Rotate(0, 0, Mathf.Deg2Rad*8);
     }
 }

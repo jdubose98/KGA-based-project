@@ -19,7 +19,7 @@ public class PlayerBulletScript : MonoBehaviour {
             projectile.transform.Translate(0, ProjectileSpeed * Time.deltaTime,0);
     }
 
-    void OnCollisionEnter(Collision2D hit)
+    void OnCollisionEnter(Collision hit)
     {
         if (hit.gameObject.tag == "Enemy" || hit.gameObject.tag == "MapObject")
         {
