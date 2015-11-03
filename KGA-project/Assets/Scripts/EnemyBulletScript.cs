@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyBulletScript : MonoBehaviour {
 
     [SerializeField] int BulletDamage = 1;
-    [SerializeField] int ProjectileSpeed = 1;
+    public int ProjectileSpeed = 4;
 
 	// Use this for initialization
 	void Start () {

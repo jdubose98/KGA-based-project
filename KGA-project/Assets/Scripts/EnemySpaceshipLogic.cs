@@ -12,9 +12,9 @@ public class EnemySpaceshipLogic : MonoBehaviour {
     [SerializeField] AudioSource FireSound;
     [SerializeField] AudioSource DieSound;
     bool Dead = false;
-
-	// Use this for initialization
-	void Start () {
+    float capturedTime = Time.time;
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -31,16 +31,16 @@ public class EnemySpaceshipLogic : MonoBehaviour {
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90; // Bringing back the copypasta! Does the math to rotate towards the player
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // I hate quaternions
 
-
-            var capturedTime = Time.time; // Get the current time
             if (Time.time - capturedTime > EnemyFireRate) // Is the enemy ready to fire?
             {
+                capturedTime = Time.time;
                 Debug.Log("Fired");
                 FireSound.Play();
                 Rigidbody2D projectile;
                 projectile = Instantiate(BulletPrefab, BulletSourceZone.position, BulletSourceZone.rotation) as Rigidbody2D; // create the new projectile
+                projectile.transform.Rotate(0,0,Mathf.Deg2Rad*180);
                 projectile.AddForce(BulletSourceZone.forward * 10000, ForceMode2D.Impulse); // go this way!
-                projectile.GetComponent<PlayerBulletScript>().ProjectileSpeed = 8; // how fast the projectile goes
+                projectile.GetComponent<EnemyBulletScript>().ProjectileSpeed = 8; // how fast the projectile goes
             }
         }
         else if (Dead)
