@@ -16,6 +16,9 @@
 #Unity3D Generated File On Crash Reports
 sysinfo.txt
 
+#Getting rid of the Library - Unity keeps crashing if I commit it with the library
+Library/*
+
 # =========================
 # Operating System Files
 # =========================
