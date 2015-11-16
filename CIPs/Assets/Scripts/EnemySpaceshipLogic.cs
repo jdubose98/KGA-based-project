@@ -37,9 +37,9 @@ public class EnemySpaceshipLogic : MonoBehaviour {
                 Debug.Log("Fired");
                 FireSound.Play();
                 Rigidbody2D projectile = Instantiate(BulletPrefab, BulletSourceZone.position, BulletSourceZone.rotation) as Rigidbody2D; // create the new projectile
-                projectile.transform.Rotate(0,0,Mathf.Deg2Rad*180);
-                projectile.AddForce(BulletSourceZone.forward * 10000, ForceMode2D.Impulse); // go this way!
-                projectile.GetComponent<EnemyBulletScript>().ProjectileSpeed = 8; // how fast the projectile goes
+                //projectile.transform.Rotate(0,0,Mathf.Deg2Rad*180);
+                //projectile.AddForce(BulletSourceZone.forward * 10000, ForceMode2D.Impulse); // go this way!
+               // projectile.GetComponent<EnemyBulletScript>().ProjectileSpeed = 8; // how fast the projectile goes
             }
         }
         else if (Dead)

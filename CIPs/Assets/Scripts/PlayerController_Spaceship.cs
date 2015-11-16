@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerController_Spaceship : MonoBehaviour {
@@ -30,6 +31,8 @@ public class PlayerController_Spaceship : MonoBehaviour {
 
 
     [SerializeField] GameObject GUIOverlay;
+
+    int lerpDelay = 1;
 	// Use this for initialization
 	void Start () {
 
@@ -54,10 +57,10 @@ public class PlayerController_Spaceship : MonoBehaviour {
             }
 
             // Control player and camera movement
-            var vect = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0); // Gets a new vector using the axes we're moving on.
+            var vector = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0); // Gets a new vector using the axes we're moving on.
             {
-                transform.position = transform.position + (PlayerSpeed * vect.normalized * Time.deltaTime); // normalized vector (no cheating!) is mult. by the speed variable, then mult. by deltaTime to keep the speed consistent even under lag.
-                Camera.main.transform.position = transform.position + (PlayerSpeed * vect.normalized * Time.deltaTime) + new Vector3(0, 0, -10); // Camera tracks the player
+                transform.position = transform.position + (PlayerSpeed * vector.normalized * Time.deltaTime); // normalized vector (no cheating!) is mult. by the speed variable, then mult. by deltaTime to keep the speed consistent even under lag.
+                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, transform.position + new Vector3(0, 0, -10), lerpDelay); // Camera tracks the player
             }
 
             // Handle displaying of thruster tail

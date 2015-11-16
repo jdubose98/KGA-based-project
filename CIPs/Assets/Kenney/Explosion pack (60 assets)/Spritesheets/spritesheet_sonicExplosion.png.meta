@@ -1,9 +1,18 @@
 fileFormatVersion: 2
 guid: f358295b4012e454cacb93ae8b9b44d2
-timeCreated: 1444741115
+timeCreated: 1447686893
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: SS_sonicExplosion_03
+    21300002: SS_sonicExplosion_01
+    21300004: SS_sonicExplosion_06
+    21300006: SS_sonicExplosion_08
+    21300008: SS_sonicExplosion_04
+    21300010: SS_sonicExplosion_00
+    21300012: SS_sonicExplosion_05
+    21300014: SS_sonicExplosion_02
+    21300016: SS_sonicExplosion_07
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -37,7 +46,8 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  allowsAlphaSplitting: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -48,7 +58,97 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: SS_sonicExplosion_03
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 228
+        width: 284
+        height: 284
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SS_sonicExplosion_01
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 362
+        width: 152
+        height: 150
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SS_sonicExplosion_06
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 372
+        width: 138
+        height: 140
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SS_sonicExplosion_08
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 211
+        width: 149
+        height: 151
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SS_sonicExplosion_04
+      rect:
+        serializedVersion: 2
+        x: 531
+        y: 248
+        width: 121
+        height: 124
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SS_sonicExplosion_00
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 36
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SS_sonicExplosion_05
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 77
+        width: 133
+        height: 134
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SS_sonicExplosion_02
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 38
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: SS_sonicExplosion_07
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 67
+        width: 143
+        height: 144
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 
