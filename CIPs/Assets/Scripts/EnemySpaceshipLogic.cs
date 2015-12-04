@@ -5,6 +5,7 @@ public class EnemySpaceshipLogic : MonoBehaviour {
 
     public int EnemyHealth = 10;
     [SerializeField] float EnemySpeed = 10;
+    [SerializeField] int BulletSpeed;
     [SerializeField] Transform player;
     [SerializeField] float EnemyFireRate = 2;
     [SerializeField] GameObject BulletPrefab;
@@ -12,11 +13,11 @@ public class EnemySpaceshipLogic : MonoBehaviour {
     [SerializeField] AudioSource FireSound;
     [SerializeField] AudioSource DieSound;
     bool Dead = false;
-    float capturedTime = Time.time;
+    float capturedTime;
     // Use this for initialization
-    void Start () {
-	
-	}
+    void Awake () {
+        capturedTime = Time.time;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -36,10 +37,10 @@ public class EnemySpaceshipLogic : MonoBehaviour {
                 capturedTime = Time.time;
                 Debug.Log("Fired");
                 FireSound.Play();
-                Rigidbody2D projectile = Instantiate(BulletPrefab, BulletSourceZone.position, BulletSourceZone.rotation) as Rigidbody2D; // create the new projectile
+                Rigidbody2D projectileClone = Instantiate(BulletPrefab, BulletSourceZone.position, BulletSourceZone.rotation) as Rigidbody2D; // create the new projectile
+                projectileClone.GetComponent<EnemyBulletScript>().ProjectileSpeed = 4;
                 //projectile.transform.Rotate(0,0,Mathf.Deg2Rad*180);
                 //projectile.AddForce(BulletSourceZone.forward * 10000, ForceMode2D.Impulse); // go this way!
-               // projectile.GetComponent<EnemyBulletScript>().ProjectileSpeed = 8; // how fast the projectile goes
             }
         }
         else if (Dead)
