@@ -40,13 +40,15 @@ public class EnemySpaceshipLogic : MonoBehaviour {
                 Rigidbody2D projectileClone = Instantiate(BulletPrefab, BulletSourceZone.position, BulletSourceZone.rotation) as Rigidbody2D; // create the new projectile
                 //debugging time
 
-                if (projectileClone != null)
-                {
-                    Debug.Log("There's a reference here");
-                    if (projectileClone.GetComponent<EnemyBulletScript>() != null)
-                        projectileClone.GetComponent<EnemyBulletScript>().ProjectileSpeed = 4;
-                }
-                else Debug.LogWarning("There appears to be no bullet script here");
+                //if (projectileClone != null)
+                //{
+                //    Debug.Log("There's a reference here");
+                //    if (projectileClone.GetComponent<EnemyBulletScript>() != null)
+                //        projectileClone.GetComponent<EnemyBulletScript>().ProjectileSpeed = 4;
+                //}
+                //else Debug.LogWarning("There appears to be no bullet script here");
+                
+            
                 //projectile.transform.Rotate(0,0,Mathf.Deg2Rad*180);
                 //projectile.AddForce(BulletSourceZone.forward * 10000, ForceMode2D.Impulse); // go this way!
             }

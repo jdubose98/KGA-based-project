@@ -9,6 +9,7 @@ public class BombProjectileScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         StartCoroutine(GoBoom());
+        gameObject.transform.Rotate(0, 0, Random.Range(-90, 90));
     }
 	
 	// Update is called once per frame
@@ -19,7 +20,7 @@ public class BombProjectileScript : MonoBehaviour {
 
     IEnumerator GoBoom()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         GameObject Frag1 = Instantiate(FragmentPrefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
         Frag1.transform.Rotate(0, 0, 90);
         GameObject Frag2 = Instantiate(FragmentPrefab, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
