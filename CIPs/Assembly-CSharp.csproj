@@ -45,7 +45,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BombProjectileScript.cs" />
+     <Compile Include="Assets\Scripts\BombProjectileScript.cs" />
+     <Compile Include="Assets\Scripts\CameraFollower.cs" />
      <Compile Include="Assets\Scripts\Enemy\BossBombProjectile.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyBulletScript.cs" />
      <Compile Include="Assets\Scripts\EnemySpaceshipLogic.cs" />
@@ -56,7 +57,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerBulletScript.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController_Spaceship.cs" />
      <Compile Include="Assets\Scripts\ShieldFlickerer.cs" />
-     <Compile Include="Assets\SoundController.cs" />
+     <Compile Include="Assets\Scripts\SoundController.cs" />
      <None Include="Assets\Kenney\Game icons (100 assets)\Spritesheet\sheet_white1x.xml" />
      <None Include="Assets\Kenney\Explosion pack (60 assets)\Spritesheets\spritesheet_groundExplosion.xml" />
      <None Include="Assets\Kenney\Game icons (100 assets)\Spritesheet\sheet_black1x.xml" />
