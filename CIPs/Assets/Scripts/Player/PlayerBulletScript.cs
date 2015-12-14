@@ -19,15 +19,17 @@ public class PlayerBulletScript : MonoBehaviour {
             projectile.transform.Translate(0, ProjectileSpeed * Time.deltaTime,0);
     }
 
-    void OnCollisionEnter(Collision hit)
+    void OnCollisionEnter2D(Collision2D hit)
     {
+        Debug.Log("We got a hit from object " + hit.gameObject.name);
         if (hit.gameObject.tag == "Enemy" || hit.gameObject.tag == "MapObject")
         {
             if (hit.gameObject.tag == "Enemy")
             {
                 hit.gameObject.GetComponent<EnemySpaceshipLogic>().EnemyHealth = hit.gameObject.GetComponent<EnemySpaceshipLogic>().EnemyHealth - ProjectileDamage;
             }
-            Destroy(gameObject);
+            Destroy(gameObject); // This destroys regardless of whether we hit a map object or not
         }
+        else Debug.Log("That wasn't an object to destroy myself on");
     }
 }

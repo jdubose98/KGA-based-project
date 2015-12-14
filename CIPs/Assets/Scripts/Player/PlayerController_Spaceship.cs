@@ -4,20 +4,23 @@ using System.Collections;
 
 public class PlayerController_Spaceship : MonoBehaviour {
 
-    //Define player variables
+    // Define player variables
     public bool Shielded = false; // Duh
-    public int ShieldStrength = 3; // How much "power" the shield has
+    public float ShieldStrength = 40; // How much "power" the shield has
+    [SerializeField] float MaxShieldStrength = 40;
     [SerializeField] float ShieldDecayRate = .1f; // How much shield we steal every "tick" defined in the tickrate
     [SerializeField] float ShieldDecayTickrate = 1f; // Per second decay rate, for finer tuning
 
     // Uncategorized
     [SerializeField] float PlayerSpeed = 1f; // The speed of the player
 	public int PlayerDamageLevel = 0; // The damage state of the player's craft (up to 3)
+
+    // Sprite renderers
     [SerializeField] SpriteRenderer ThrusterRenderer;
     [SerializeField] SpriteRenderer ShieldRenderer;
     [SerializeField] SpriteRenderer DamageOverlay;
 
-	// Projectile stuff ok
+	// Projectile info
 	[SerializeField] float FireSpeed = 0.5f; // Player's fire speed per second
 	[SerializeField] Rigidbody2D ProjectilePrefab;
 	[SerializeField] Transform ProjectileSourceZone;
@@ -29,19 +32,38 @@ public class PlayerController_Spaceship : MonoBehaviour {
 	[SerializeField] AudioSource PlayerDeathSound;
     [SerializeField] AudioSource ThrusterSound;
 
-
+    // GUI
     [SerializeField] GameObject GUIOverlay;
+    [SerializeField] Image ShieldBar;
 
+    // Colliders
+    [SerializeField] Collider2D ShieldCollider;
+
+    //Particles
+    [SerializeField] ParticleSystem ShieldEmitter;
+    [SerializeField] ParticleSystem FireEmitter;
+
+    // Others
     int lerpDelay = 1;
+    bool DecayCoroutineRunning = false;
+
+
+
 	// Use this for initialization
 	void Start () {
-
+        StartCoroutine(ShieldDecayAndUpdate(ShieldDecayTickrate, ShieldDecayRate, ShieldBar));
+        DecayCoroutineRunning = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (GUIOverlay.GetComponent<UserInterfaceLogic>().GamePaused == false) // Checks to see if the game is paused
         {
+
+            if (ShieldStrength > 0 && DecayCoroutineRunning == false && Shielded == true) // Is shield down and no coroutine running?
+            {
+                StartCoroutine(ShieldDecayAndUpdate(ShieldDecayTickrate, ShieldDecayRate, ShieldBar));
+            }
 
             if (Input.GetButtonDown("Fire1")) // checks to see if the player is firing
             { 
@@ -52,7 +74,7 @@ public class PlayerController_Spaceship : MonoBehaviour {
                     Rigidbody2D projectile; // variable to hold onto it
                     projectile = Instantiate(ProjectilePrefab, ProjectileSourceZone.position, ProjectileSourceZone.rotation) as Rigidbody2D; // makes the projectile
                     projectile.AddForce(ProjectileSourceZone.forward * 10000, ForceMode2D.Impulse); // throws the projectile forwards
-                    projectile.GetComponent<PlayerBulletScript>().ProjectileSpeed = 8; // sets the bullet speed on the script
+                    projectile.GetComponent<PlayerBulletScript>().ProjectileSpeed = 12; // sets the bullet speed on the script
                 }
             }
 
@@ -85,4 +107,25 @@ public class PlayerController_Spaceship : MonoBehaviour {
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // grabs our quaternion so we can rotate the character in world space.
         }
 	}
+
+    IEnumerator ShieldDecayAndUpdate(float m_rateTime, float m_rateDamage, Image guiBar)
+    {
+        if (ShieldStrength >= 0) { 
+            ShieldStrength = ShieldStrength - m_rateDamage; // Slowly nibble away at the shield
+            ShieldBar.fillAmount = ShieldStrength / MaxShieldStrength;
+            yield return new WaitForSeconds(m_rateTime);
+            StartCoroutine(ShieldDecayAndUpdate(ShieldDecayTickrate,ShieldDecayRate,ShieldBar));
+        }
+
+        if (ShieldStrength <= 0)
+        {
+            ShieldStrength = 0;
+            Shielded = false;
+            ShieldRenderer.enabled = false;
+            ShieldCollider.enabled = false;
+            ShieldEmitter.Play();
+            yield return new WaitForSeconds(0.2f);
+            ShieldEmitter.Stop();
+        }
+    }
 }

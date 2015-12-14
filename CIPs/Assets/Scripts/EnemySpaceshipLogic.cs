@@ -3,23 +3,24 @@ using System.Collections;
 
 public class EnemySpaceshipLogic : MonoBehaviour {
 
-    public int EnemyHealth = 10;
-    [SerializeField] float EnemySpeed = 10;
-    [SerializeField] int BulletSpeed;
-    [SerializeField] Transform player;
-    [SerializeField] float EnemyFireRate = 2;
-    [SerializeField] GameObject BulletPrefab;
-    [SerializeField] Transform BulletSourceZone;
-    [SerializeField] AudioSource FireSound;
-    [SerializeField] AudioSource DieSound;
-    bool Dead = false;
-    float capturedTime;
-    // Use this for initialization
+    public int EnemyHealth = 10; // How much health this enemy has -- public so we can actually damage the enemy
+    [SerializeField] float EnemySpeed = 10; // How fast this enemy moves (TBC)
+    [SerializeField] Transform player; // The player's position
+    [SerializeField] float EnemyFireRate = 2; // How much of a delay between bullets the enemy has
+    [SerializeField] int EnemyProjectileSpeed = 5; // actually i can't use this now
+    [SerializeField] GameObject BulletPrefab; // The prefab of the bullet this enemy fires
+    [SerializeField] Transform BulletSourceZone; // Refers to the empty gameobject used to spit them out
+    [SerializeField] AudioSource FireSound; // Refers to their pew sounds
+    [SerializeField] AudioSource DieSound; // Refers to when they go boom
+    bool Dead = false; // Death state
+    float capturedTime; // So it's accessible by everything in the script
+
+
     void Awake () {
-        capturedTime = Time.time;
+        capturedTime = Time.time; // Init capturedTime
     }
 	
-	// Update is called once per frame
+
 	void Update () {
         if (EnemyHealth <= 0 && !Dead) // If their health is 0 or below and they're not dead yet...
         {
@@ -34,28 +35,26 @@ public class EnemySpaceshipLogic : MonoBehaviour {
 
             if (Time.time - capturedTime > EnemyFireRate) // Is the enemy ready to fire?
             {
-                capturedTime = Time.time;
-                Debug.Log("Fired");
-                FireSound.Play();
-                Rigidbody2D projectileClone = Instantiate(BulletPrefab, BulletSourceZone.position, BulletSourceZone.rotation) as Rigidbody2D; // create the new projectile
-                //debugging time
+                capturedTime = Time.time; // Reset our timer
+                FireSound.Play(); // Play the sound
+                Rigidbody2D projectileClone; // WHY DIDN'T I THINK OF THIS EARLIER AAAAAAAAGH NOW ALL MY PROBLEMS ARE SOLVED (no they're not)
+                projectileClone = Instantiate(BulletPrefab, BulletSourceZone.position, BulletSourceZone.rotation) as Rigidbody2D; // create the new projectile
+
 
                 //if (projectileClone != null)
                 //{
                 //    Debug.Log("There's a reference here");
                 //    if (projectileClone.GetComponent<EnemyBulletScript>() != null)
-                //        projectileClone.GetComponent<EnemyBulletScript>().ProjectileSpeed = 4;
+                //        projectileClone.GetComponent<EnemyBulletScript>().ProjectileSpeed = EnemyProjectileSpeed; //DANGIT IT DOESN'T WORK
                 //}
                 //else Debug.LogWarning("There appears to be no bullet script here");
-                
-            
-                //projectile.transform.Rotate(0,0,Mathf.Deg2Rad*180);
-                //projectile.AddForce(BulletSourceZone.forward * 10000, ForceMode2D.Impulse); // go this way!
+
             }
         }
         else if (Dead)
         {
-            // Exploderize the guy!
+            // Todo: Make the enemy blow up into a satisfying shower of bits and pieces.
+            Destroy(gameObject);
         }
 
 
