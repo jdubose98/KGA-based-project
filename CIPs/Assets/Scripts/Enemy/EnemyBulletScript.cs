@@ -17,12 +17,13 @@ public class EnemyBulletScript : MonoBehaviour {
         projectile.transform.Translate(0, ProjectileSpeed * Time.deltaTime, 0);
     }
 
-    void OnTriggerEnter(Collider hit)
+    void OnCollisionEnter2D(Collision2D hit)
     {
-        if (hit.tag == "Player")
+        if (hit.gameObject.tag == "Player")
         {
-            if (hit.GetComponent<PlayerController_Spaceship>().Shielded == true)
-                hit.GetComponent<PlayerController_Spaceship>().ShieldStrength = hit.GetComponent<PlayerController_Spaceship>().ShieldStrength - BulletDamage;
+            if (hit.gameObject.GetComponent<PlayerController_Spaceship>().Shielded == true)
+                hit.gameObject.GetComponent<PlayerController_Spaceship>().ShieldStrength = hit.gameObject.GetComponent<PlayerController_Spaceship>().ShieldStrength - BulletDamage;
+            Destroy(gameObject);
         }
     }
 }

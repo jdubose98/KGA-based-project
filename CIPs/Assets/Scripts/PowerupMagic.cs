@@ -7,9 +7,14 @@ public class PowerupMagic : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D hitObject)
     {
-        if (hitObject.Tag = "Player")
+        var Controller = hitObject.GetComponentInParent<PlayerController_Spaceship>();
+        if (hitObject.tag == "Player")
         {
-            GameObject.GetComponentInParent<PlayerController_Spaceship>().ShieldStrength = ShieldStrength + BoosterPower;
+            if (Controller.ShieldStrength + BoosterPower <= Controller.MaxShieldStrength)
+                Controller.ShieldStrength = Controller.ShieldStrength + BoosterPower;
+            else Controller.ShieldStrength = Controller.MaxShieldStrength;
+
+            Destroy(gameObject, 1);
         }
     }
 }

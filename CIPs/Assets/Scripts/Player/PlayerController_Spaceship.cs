@@ -7,7 +7,7 @@ public class PlayerController_Spaceship : MonoBehaviour {
     // Define player variables
     public bool Shielded = false; // Duh
     public float ShieldStrength = 40; // How much "power" the shield has
-    [SerializeField] float MaxShieldStrength = 40;
+    public float MaxShieldStrength = 40;
     [SerializeField] float ShieldDecayRate = .1f; // How much shield we steal every "tick" defined in the tickrate
     [SerializeField] float ShieldDecayTickrate = 1f; // Per second decay rate, for finer tuning
 
@@ -43,16 +43,20 @@ public class PlayerController_Spaceship : MonoBehaviour {
     [SerializeField] ParticleSystem ShieldEmitter;
     [SerializeField] ParticleSystem FireEmitter;
 
+    //Sprites
+    [SerializeField] Sprite DamageLevel1;
+    [SerializeField] Sprite DamageLevel2;
+    [SerializeField] Sprite DamageLevel3;
+
     // Others
-    int lerpDelay = 1;
-    bool DecayCoroutineRunning = false;
+    int lerpDelay = 1; // Has a reason to be here
+    bool OneShotFired = false; // So we don't get "looping" of shield knockdown FX
 
 
+    // -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	// Use this for initialization
-	void Start () {
-        StartCoroutine(ShieldDecayAndUpdate(ShieldDecayTickrate, ShieldDecayRate, ShieldBar));
-        DecayCoroutineRunning = true;
+    // Use this for initialization
+    void Start () {
 	}
 	
 	// Update is called once per frame
@@ -60,10 +64,24 @@ public class PlayerController_Spaceship : MonoBehaviour {
         if (GUIOverlay.GetComponent<UserInterfaceLogic>().GamePaused == false) // Checks to see if the game is paused
         {
 
-            if (ShieldStrength > 0 && DecayCoroutineRunning == false && Shielded == true) // Is shield down and no coroutine running?
+            if (ShieldStrength > 0)
             {
-                StartCoroutine(ShieldDecayAndUpdate(ShieldDecayTickrate, ShieldDecayRate, ShieldBar));
+                if (Shielded == false)
+                Shielded = true;
+                if (ShieldRenderer.enabled == false)
+                ShieldRenderer.enabled = true;
+                ShieldCollider.enabled = true;
+                OneShotFired = false;
             }
+            else if (ShieldStrength <= 0)
+            {
+                if (OneShotFired == false)
+                {
+                    ShieldCrash();
+                    OneShotFired = true;
+                }
+            }
+
 
             if (Input.GetButtonDown("Fire1")) // checks to see if the player is firing
             { 
@@ -105,18 +123,14 @@ public class PlayerController_Spaceship : MonoBehaviour {
             float angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) - 90; // i admit to copypasta on this line. the -90 corrects the rotation
                                                                             // programmers who actually took math classes made math libraries for us people...
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // grabs our quaternion so we can rotate the character in world space.
+
+            // And now, we update the GUI
+            ShieldBar.fillAmount = ShieldStrength / MaxShieldStrength;
         }
 	}
 
-    IEnumerator ShieldDecayAndUpdate(float m_rateTime, float m_rateDamage, Image guiBar)
+    public void ShieldCrash()
     {
-        if (ShieldStrength >= 0) { 
-            ShieldStrength = ShieldStrength - m_rateDamage; // Slowly nibble away at the shield
-            ShieldBar.fillAmount = ShieldStrength / MaxShieldStrength;
-            yield return new WaitForSeconds(m_rateTime);
-            StartCoroutine(ShieldDecayAndUpdate(ShieldDecayTickrate,ShieldDecayRate,ShieldBar));
-        }
-
         if (ShieldStrength <= 0)
         {
             ShieldStrength = 0;
@@ -124,8 +138,33 @@ public class PlayerController_Spaceship : MonoBehaviour {
             ShieldRenderer.enabled = false;
             ShieldCollider.enabled = false;
             ShieldEmitter.Play();
-            yield return new WaitForSeconds(0.2f);
-            ShieldEmitter.Stop();
+            StartCoroutine(ParticleHack()); // ewww this is nasty
         }
+    }
+
+    void UpdateWhenDamaged()
+    {
+        if (PlayerDamageLevel != 0)
+        {
+            DamageOverlay.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        if (PlayerDamageLevel == 1)
+            DamageOverlay.sprite = DamageLevel1;
+        else if (PlayerDamageLevel == 2)
+            DamageOverlay.sprite = DamageLevel2;
+        else if (PlayerDamageLevel == 3)
+            DamageOverlay.sprite = DamageLevel3;
+        Die();
+    }
+
+    void Die()
+    {
+
+    }
+
+    IEnumerator ParticleHack() // please no
+    {
+        yield return new WaitForSeconds(1); // STOP
+        ShieldEmitter.GetComponent<ParticleSystem>().Stop(); // STOP THIS UGLY PROGRAMMING NOW
     }
 }

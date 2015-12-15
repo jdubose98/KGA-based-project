@@ -45,11 +45,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BombProjectileScript.cs" />
      <Compile Include="Assets\Scripts\CameraFollower.cs" />
+     <Compile Include="Assets\Scripts\Enemy\BombProjectileScript.cs" />
      <Compile Include="Assets\Scripts\Enemy\BossBombProjectile.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyBulletScript.cs" />
-     <Compile Include="Assets\Scripts\EnemySpaceshipLogic.cs" />
+     <Compile Include="Assets\Scripts\Enemy\EnemySpaceshipLogic.cs" />
      <Compile Include="Assets\Scripts\GenericSpinner.cs" />
      <Compile Include="Assets\Scripts\HUB SCRIPTS\LoadThisLevel.cs" />
      <Compile Include="Assets\Scripts\Interface\CursorTracker.cs" />
