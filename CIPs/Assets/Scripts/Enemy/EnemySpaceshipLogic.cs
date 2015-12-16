@@ -20,6 +20,10 @@ public class EnemySpaceshipLogic : MonoBehaviour {
         capturedTime = Time.time; // Init capturedTime
     }
 	
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
 	void Update () {
         if (EnemyHealth <= 0 && !Dead) // If their health is 0 or below and they're not dead yet...

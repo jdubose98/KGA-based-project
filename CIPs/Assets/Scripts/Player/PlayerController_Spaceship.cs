@@ -8,8 +8,6 @@ public class PlayerController_Spaceship : MonoBehaviour {
     public bool Shielded = false; // Duh
     public float ShieldStrength = 40; // How much "power" the shield has
     public float MaxShieldStrength = 40;
-    [SerializeField] float ShieldDecayRate = .1f; // How much shield we steal every "tick" defined in the tickrate
-    [SerializeField] float ShieldDecayTickrate = 1f; // Per second decay rate, for finer tuning
 
     // Uncategorized
     [SerializeField] float PlayerSpeed = 1f; // The speed of the player
