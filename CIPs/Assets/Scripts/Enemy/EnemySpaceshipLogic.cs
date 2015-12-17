@@ -14,15 +14,29 @@ public class EnemySpaceshipLogic : MonoBehaviour {
     [SerializeField] AudioSource DieSound; // Refers to when they go boom
     bool Dead = false; // Death state
     float capturedTime; // So it's accessible by everything in the script
+    [SerializeField] bool UseLongHealthBar = false;
+    [SerializeField] GameObject HealthbarPrefabShort;
+    [SerializeField] GameObject HealthbarPrefabLong;
 
 
     void Awake () {
         capturedTime = Time.time; // Init capturedTime
     }
-	
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (UseLongHealthBar == true)
+            { var healthBar = Instantiate(HealthbarPrefabLong);
+            healthBar.GetComponent<HealthbarTracker>().TargetedObject = gameObject.transform;
+            healthBar.GetComponent<HealthbarTracker>().LoggedHealth = EnemyHealth;
+        }
+        else
+            { var healthBar = Instantiate(HealthbarPrefabShort);
+            healthBar.GetComponent<HealthbarTracker>().TargetedObject = gameObject.transform;
+            healthBar.GetComponent<HealthbarTracker>().LoggedHealth = EnemyHealth;
+        }
+
     }
 
 	void Update () {

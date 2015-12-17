@@ -25,5 +25,7 @@ public class EnemyBulletScript : MonoBehaviour {
                 hit.gameObject.GetComponent<PlayerController_Spaceship>().ShieldStrength = hit.gameObject.GetComponent<PlayerController_Spaceship>().ShieldStrength - BulletDamage;
             Destroy(gameObject);
         }
+        else if (hit.gameObject.tag == "MapObject")
+            Destroy(gameObject);
     }
 }
