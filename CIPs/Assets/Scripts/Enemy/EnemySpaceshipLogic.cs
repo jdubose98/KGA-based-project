@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemySpaceshipLogic : MonoBehaviour {
 
     public int EnemyHealth = 10; // How much health this enemy has -- public so we can actually damage the enemy
+    public int RotationCorrectionValue; //Because we're odd
     [SerializeField] float EnemySpeed = 10; // How fast this enemy moves (TBC)
     [SerializeField] Transform player; // The player's position
     [SerializeField] float EnemyFireRate = 2; // How much of a delay between bullets the enemy has
@@ -48,7 +49,7 @@ public class EnemySpaceshipLogic : MonoBehaviour {
         {
 
             var dir = player.transform.position - transform.position; // Where we need to look
-            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90; // Bringing back the copypasta! Does the math to rotate towards the player
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + RotationCorrectionValue; // Bringing back the copypasta! Does the math to rotate towards the player
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); // I hate quaternions
 
             if (Time.time - capturedTime > EnemyFireRate) // Is the enemy ready to fire?
