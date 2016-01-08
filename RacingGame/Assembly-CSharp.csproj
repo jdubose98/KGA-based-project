@@ -45,8 +45,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Drive.cs" />
-     <Compile Include="Assets\Follower.cs" />
+     <Compile Include="Assets\Scripts\Drive.cs" />
+     <Compile Include="Assets\Scripts\Follower.cs" />
      <None Include="Assets\Art\Kenney\Racing pack (420 assets)\Spritesheets\spritesheet_tiles.xml" />
      <None Include="Assets\Art\Kenney\Racing pack (420 assets)\Spritesheets\spritesheet_characters.xml" />
      <None Include="Assets\Editor\UnityLock\ReadMe.txt" />
