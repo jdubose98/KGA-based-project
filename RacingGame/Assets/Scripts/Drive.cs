@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Drive : MonoBehaviour {
 
@@ -12,15 +13,34 @@ public class Drive : MonoBehaviour {
     [SerializeField] AudioSource ThrottleInSource;
     [SerializeField] AudioSource ThrottleOutSource;
     [SerializeField] AudioSource SkidSource;
+    [SerializeField] float EnginePitch;
+    // Other
+    [SerializeField] ParticleSystem TireSmoke;
+    [SerializeField] bool IsPlayer2;
+
+    // UI
+    [SerializeField]
+    Image GaugeFiller;
 
     // ****** Private variables ****** //
     float forceMultiplier;
     public float speed;
     Vector3 lastPosition;
+    string SelectedPlayerAxisH;
+    string SelectedPlayerAxisV;
 
     // Use this for initialization
     void Start () {
-	
+	    if (IsPlayer2)
+        {
+            SelectedPlayerAxisH = "Player 2 Turn";
+            SelectedPlayerAxisV = "Player 2 Drive";
+        }
+        else
+        {
+            SelectedPlayerAxisH = "Player 1 Turn";
+            SelectedPlayerAxisV = "Player 1 Drive";
+        }
 	}
 	
     void FixedUpdate()
@@ -31,10 +51,10 @@ public class Drive : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        gameObject.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2 (0, DriveSpeed * Input.GetAxis("Vertical")*forceMultiplier));
-        gameObject.transform.Rotate(new Vector3(0, 0, TurnSpeed * -Input.GetAxis("Horizontal") * Time.deltaTime));
+        gameObject.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2 (0, DriveSpeed * Input.GetAxis(SelectedPlayerAxisV)*forceMultiplier)); // Controls speed
+        gameObject.transform.Rotate(new Vector3(0, 0, TurnSpeed * -Input.GetAxis(SelectedPlayerAxisH) * Time.deltaTime)*(speed*5)); // Gets turn speed, multiplies by horizontal ais input for steering, then smooths with deltatime
 
-        if (Input.GetAxis("Vertical") != 0)
+        if (Input.GetAxis(SelectedPlayerAxisV) != 0)
         {
             if (forceMultiplier <= 1) {
                 forceMultiplier = forceMultiplier + 0.01f;
@@ -54,19 +74,25 @@ public class Drive : MonoBehaviour {
                 forceMultiplier = 0; // safety net
         }
 
-        ThrottleInSource.pitch = .8f + (speed * 4f); // Set pitch
-        ThrottleOutSource.pitch = .8f + (speed * 4f); // Set pitch
+        ThrottleInSource.pitch = .8f + (speed * 4f) * EnginePitch; // Set pitch
+        ThrottleOutSource.pitch = .8f + (speed * 4f) * EnginePitch; // Set pitch
 
-        if (speed*5 > .8)
+        GaugeFiller.fillAmount = .08f + (speed * 3.8f);
+
+        if (speed * 5 > .8)
         {
-            if (Input.GetAxisRaw("Horizontal") != 0)
+            if (Input.GetAxisRaw(SelectedPlayerAxisH) != 0)
             {
                 SkidSource.volume = SkidSource.volume + 0.075f;
+                TireSmoke.Play();
             }
-            else
+            else {
                 SkidSource.volume = SkidSource.volume - 0.075f;
+                TireSmoke.Stop(); }
         }
-        else
+        else{
             SkidSource.volume = SkidSource.volume - 0.075f;
+            TireSmoke.Stop();
+        }
     }
 }
