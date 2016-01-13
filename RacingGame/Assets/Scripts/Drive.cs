@@ -13,7 +13,9 @@ public class Drive : MonoBehaviour {
     [SerializeField] AudioSource ThrottleInSource;
     [SerializeField] AudioSource ThrottleOutSource;
     [SerializeField] AudioSource SkidSource;
+    [SerializeField] AudioSource HornClip;
     [SerializeField] float EnginePitch;
+
     // Other
     [SerializeField] ParticleSystem TireSmoke;
     [SerializeField] bool IsPlayer2;
@@ -31,7 +33,11 @@ public class Drive : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	    if (IsPlayer2)
+
+        ThrottleInSource.Play();
+        ThrottleOutSource.Play();
+        SkidSource.Play();
+        if (IsPlayer2)
         {
             SelectedPlayerAxisH = "Player 2 Turn";
             SelectedPlayerAxisV = "Player 2 Drive";
@@ -94,5 +100,11 @@ public class Drive : MonoBehaviour {
             SkidSource.volume = SkidSource.volume - 0.075f;
             TireSmoke.Stop();
         }
+
+        //Horn
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !IsPlayer2)
+                HornClip.Play();
+        if (Input.GetKeyDown(KeyCode.RightShift) && IsPlayer2)
+                HornClip.Play();
     }
 }
