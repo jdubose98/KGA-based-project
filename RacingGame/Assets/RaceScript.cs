@@ -28,23 +28,42 @@ public class RaceScript : MonoBehaviour {
     [SerializeField] GameObject StartCount1;
     [SerializeField] GameObject StartGo;
 
+    [SerializeField] GameObject PauseMenu;
+
     //Sounds
     [SerializeField] AudioSource TickClip;
     [SerializeField] AudioSource GoClip;
     [SerializeField] AudioSource CheckpointClip;
 
+    public bool Paused = false;
 
     int State = 0; // 0 is unit, 1 is 3, 5 is GO
 
     // Use this for initialization
     void Start () {
         StartCoroutine(RaceStarter());
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!Paused)
+            {
+                Time.timeScale = 0;
+                PauseMenu.SetActive(true);
+                Paused = true;
+            }
+            else
+            {
+                Time.timeScale = 1;
+                PauseMenu.SetActive(false);
+                Paused = false;
+            }
+            Debug.Log("caught escape escaping");
+        }
+    }
 
     IEnumerator RaceStarter() {
         if (State < 5) {

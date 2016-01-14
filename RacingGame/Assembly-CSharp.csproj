@@ -45,7 +45,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AudioManager.cs" />
+     <Compile Include="Assets\MenuManager.cs" />
      <Compile Include="Assets\RaceScript.cs" />
      <Compile Include="Assets\Scripts\Drive.cs" />
      <Compile Include="Assets\Scripts\Follower.cs" />
